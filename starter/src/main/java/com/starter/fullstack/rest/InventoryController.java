@@ -26,8 +26,8 @@ public class InventoryController {
   }
 
   /**
-   * Find Products.
-   * @return List of Product.
+   * Find Inventories.
+   * @return List of Inventory.
    */
   @GetMapping
   public List<Inventory> findInventories() {
@@ -35,7 +35,7 @@ public class InventoryController {
   }
 
   @PostMapping
-  public Inventory createInventory(@Valid @RequestBody Inventory inventory) {
+  public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
   }
 }
