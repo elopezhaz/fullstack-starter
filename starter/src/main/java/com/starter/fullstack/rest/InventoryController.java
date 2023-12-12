@@ -38,8 +38,13 @@ public class InventoryController {
   public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
   }
+<<<<<<< HEAD
   @RequestMapping(value = "{id}", method = {RequestMethod.DELETE})
   public Optional<Inventory> deleteInventory(@PathVariable("id") String id) {
+=======
+  @DeleteMapping("{id")
+  public Optional<Inventory> deleteInventory(@PathVariable String id) {
+>>>>>>> 2078954 (wrote initial delete rest endpoint. no tests yet)
     return this.inventoryDAO.delete(id);
   }
 }
