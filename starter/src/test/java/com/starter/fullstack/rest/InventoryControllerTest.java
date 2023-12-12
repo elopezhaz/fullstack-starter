@@ -15,8 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -78,5 +77,18 @@ public class InventoryControllerTest {
                 .andExpect(status().isOk());
 
         Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
+    }
+
+    /**
+     * Test remove endpoint.
+     * @throws Throwable see MockMvc
+     */
+    @Test
+    public void remove() throws Throwable {
+        this.mockMvc.perform(delete("/inventory/" + this.inventory.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
     }
 }

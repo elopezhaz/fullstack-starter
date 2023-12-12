@@ -40,8 +40,8 @@ public class InventoryController {
   public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
   }
-  @DeleteMapping("{id")
-  public Optional<Inventory> deleteInventory(@PathVariable String id) {
+  @RequestMapping(value = "{id}", method = {RequestMethod.DELETE})
+  public Optional<Inventory> deleteInventory(@PathVariable("id") String id) {
     return this.inventoryDAO.delete(id);
   }
 }
