@@ -3,6 +3,8 @@ package com.starter.fullstack.rest;
 import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,6 +39,10 @@ public class InventoryController {
   @PostMapping
   public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
+  }
+  @DeleteMapping("{id")
+  public Optional<Inventory> deleteInventory(@PathVariable String id) {
+    return this.inventoryDAO.delete(id);
   }
 }
 
