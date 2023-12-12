@@ -13,6 +13,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2da8cca (remove endpoint passing tests)
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -74,6 +78,7 @@ public class InventoryControllerTest {
                 .content(this.objectMapper.writeValueAsString(this.inventory)))
          .andExpect(status().isOk());
 
+<<<<<<< HEAD
     Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
   }
 
@@ -90,3 +95,21 @@ public class InventoryControllerTest {
     Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
   }
 }
+=======
+        Assert.assertEquals(2, this.mongoTemplate.findAll(Inventory.class).size());
+    }
+
+    /**
+     * Test remove endpoint.
+     * @throws Throwable see MockMvc
+     */
+    @Test
+    public void remove() throws Throwable {
+        this.mockMvc.perform(delete("/inventory/" + this.inventory.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+
+        Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
+    }
+}
+>>>>>>> 2da8cca (remove endpoint passing tests)
