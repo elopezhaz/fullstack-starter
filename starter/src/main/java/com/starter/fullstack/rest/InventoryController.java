@@ -3,7 +3,6 @@ package com.starter.fullstack.rest;
 import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
