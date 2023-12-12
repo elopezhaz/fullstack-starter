@@ -1,9 +1,12 @@
 package com.starter.fullstack.dao;
 
+import com.mongodb.client.result.DeleteResult;
 import com.starter.fullstack.api.Inventory;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
