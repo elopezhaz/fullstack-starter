@@ -3,6 +3,7 @@ package com.starter.fullstack.dao;
 import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.Assert;
@@ -30,6 +31,7 @@ public class InventoryDAOTest {
   private InventoryDAO inventoryDAO;
   private static final String NAME = "Amber";
   private static final String PRODUCT_TYPE = "hops";
+  private Inventory inventory = new Inventory();
 
   @Before
   public void setup() {
@@ -62,5 +64,13 @@ public class InventoryDAOTest {
     Assert.assertTrue(invList.contains(inventory));
     Assert.assertEquals(1, invList.size());
     Assert.assertNotEquals("123456", createdInv.getId());
+  }
+
+  @Test
+  public void delete() {
+    Inventory createdInv = this.inventoryDAO.create(inventory);
+    this.inventoryDAO.delete(createdInv.getId());
+    Assert.assertEquals(Optional.empty(), this.inventoryDAO.retrieve(createdInv.getId()));
+    Assert.assertFalse(this.inventoryDAO.findAll().contains(inventory));
   }
 }
