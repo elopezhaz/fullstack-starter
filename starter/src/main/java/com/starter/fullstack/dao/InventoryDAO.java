@@ -1,13 +1,18 @@
 package com.starter.fullstack.dao;
 
+import com.mongodb.client.result.DeleteResult;
 import com.starter.fullstack.api.Inventory;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.index.Index;
 import org.springframework.data.mongodb.core.index.IndexOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.util.Assert;
 
 /**
@@ -17,6 +22,15 @@ public class InventoryDAO {
   private final MongoTemplate mongoTemplate;
   private static final String NAME = "name";
   private static final String PRODUCT_TYPE = "productType";
+
+  /**
+   * Get search query from id
+   * @param id Id of object to find.
+   * @return query Query that can be used to find object
+   */
+  private Query getQuery(String id) {
+    return new Query(Criteria.where("id").is(id));
+  }
 
   /**
    * Default Constructor.
@@ -61,8 +75,7 @@ public class InventoryDAO {
    * @return Found Inventory.
    */
   public Optional<Inventory> retrieve(String id) {
-    // TODO
-    return Optional.empty();
+    return Optional.ofNullable(this.mongoTemplate.findOne(getQuery(id), Inventory.class));
   }
 
   /**
@@ -82,7 +95,6 @@ public class InventoryDAO {
    * @return Deleted Inventory.
    */
   public Optional<Inventory> delete(String id) {
-    // TODO
-    return Optional.empty();
+    return Optional.ofNullable(this.mongoTemplate.findAndRemove(getQuery(id), Inventory.class));
   }
 }
