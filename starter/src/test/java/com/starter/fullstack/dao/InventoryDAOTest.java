@@ -34,6 +34,9 @@ public class InventoryDAOTest {
   @Before
   public void setup() {
     this.inventoryDAO = new InventoryDAO(this.mongoTemplate);
+    inventory.setId("123456");
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
   }
 
   @After
@@ -46,22 +49,17 @@ public class InventoryDAOTest {
    */
   @Test
   public void findAll() {
-    Inventory inventory = new Inventory();
-    inventory.setName(NAME);
-    inventory.setProductType(PRODUCT_TYPE);
-    this.mongoTemplate.save(inventory);
+    this.mongoTemplate.save(this.inventory);
     List<Inventory> actualInventory = this.inventoryDAO.findAll();
     Assert.assertFalse(actualInventory.isEmpty());
   }
 
   @Test
   public void create() {
-    Inventory inventory = new Inventory();
-    inventory.setId("123456");
-    inventory.setName(NAME);
-    inventory.setProductType(PRODUCT_TYPE);
-    InventoryDAO invDao = new InventoryDAO(this.mongoTemplate);
-    Inventory createdInv = invDao.create(inventory);
+    Inventory createdInv = this.inventoryDAO.create(inventory);
     Assert.assertEquals(inventory, createdInv);
+    List<Inventory> invList = this.inventoryDAO.findAll();
+    Assert.assertTrue(invList.contains(inventory));
+    Assert.assertEquals(1, invList.size());
   }
 }
