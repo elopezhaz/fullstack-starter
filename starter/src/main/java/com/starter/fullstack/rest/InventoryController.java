@@ -4,9 +4,9 @@ import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Inventory Controller.
@@ -26,12 +26,17 @@ public class InventoryController {
   }
 
   /**
-   * Find Products.
-   * @return List of Product.
+   * Find Inventories.
+   * @return List of Inventory.
    */
   @GetMapping
   public List<Inventory> findInventories() {
     return this.inventoryDAO.findAll();
+  }
+
+  @PostMapping
+  public Inventory createInventory(@RequestBody Inventory inventory) {
+    return this.inventoryDAO.create(inventory);
   }
 }
 
