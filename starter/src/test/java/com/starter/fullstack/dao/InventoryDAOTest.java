@@ -34,6 +34,9 @@ public class InventoryDAOTest {
   @Before
   public void setup() {
     this.inventoryDAO = new InventoryDAO(this.mongoTemplate);
+    inventory.setId("123456");
+    inventory.setName(NAME);
+    inventory.setProductType(PRODUCT_TYPE);
   }
 
   @After
