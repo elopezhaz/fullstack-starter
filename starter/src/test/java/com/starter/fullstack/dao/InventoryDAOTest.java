@@ -61,5 +61,6 @@ public class InventoryDAOTest {
     List<Inventory> invList = this.inventoryDAO.findAll();
     Assert.assertTrue(invList.contains(inventory));
     Assert.assertEquals(1, invList.size());
+    Assert.assertNotEquals("123456", createdInv.getId());
   }
 }
