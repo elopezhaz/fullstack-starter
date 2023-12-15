@@ -1,3 +1,4 @@
+import * as alerts from '../alerts'
 import axios from 'axios'
 import { createAction, handleActions } from 'redux-actions'
 
@@ -21,6 +22,10 @@ export const findInventory = createAction(
       .get(`${config.restAPIUrl}/inventory`)
       .then((suc) => {
         dispatch(refreshInventory(suc.data))
+<<<<<<< HEAD
+=======
+        alerts.openSuccess()
+>>>>>>> 22b40e0 (inventory duck style changes)
       })
 )
 
@@ -36,6 +41,7 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
       })
       invs.push(suc.data)
       dispatch(refreshInventory(invs))
+      alerts.openSuccess()
     })
 )
 
