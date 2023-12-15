@@ -3,6 +3,10 @@ package com.starter.fullstack.rest;
 import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
+<<<<<<< HEAD
+=======
+import java.util.Optional;
+>>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
