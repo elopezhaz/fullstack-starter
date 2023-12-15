@@ -1,4 +1,3 @@
-import * as alerts from '../alerts'
 import axios from 'axios'
 import { createAction, handleActions } from 'redux-actions'
 
