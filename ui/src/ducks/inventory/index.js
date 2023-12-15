@@ -7,7 +7,7 @@ const actions = {
   INVENTORY_GET_ALL_PENDING: 'inventory/get_all_PENDING',
   INVENTORY_SAVE: 'inventory/save',
   INVENTORY_DELETE: 'inventory/delete',
-  INVENTORY_REFRESH: 'inventory/refresh'
+  INVENTORY_REFRESH: 'inventory/refresh',
 }
 
 export let defaultState = {
