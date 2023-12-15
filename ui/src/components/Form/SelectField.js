@@ -1,8 +1,9 @@
 import { getIn } from 'formik'
-import MuiTextField from '@material-ui/core/TextField'
+import { MenuItem } from '@material-ui/core'
+import MuiSelectField from '@material-ui/core/Select'
 import React from 'react'
 
-const fieldToTextField = ({
+const fieldToSelectField = ({
   backgroundColor,
   custom,
   disabled,
@@ -31,13 +32,12 @@ const fieldToTextField = ({
   }
 }
 
-export const TextField = ({ children, ...props }) =>
-  <MuiTextField {...fieldToTextField(props)}>
+export const SelectField = ({ children, ...props }) =>
+  <MuiSelectField {...fieldToSelectField(props)}>
     {children}
-  </MuiTextField>
+  </MuiSelectField>
 
+export default SelectField
 
-export default TextField
-
-TextField.displayName = 'FormikTextField'
-TextField.tabIndex = 0
+SelectField.displayName = 'FormikSelectField'
+SelectField.tabIndex = 0

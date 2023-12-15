@@ -1,7 +1,6 @@
 package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
-import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Resource;
