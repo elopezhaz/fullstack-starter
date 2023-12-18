@@ -1,13 +1,8 @@
 import * as inventoryDuck from '../ducks/inventory'
 import * as productDuck from '../ducks/products'
 import Checkbox from '@material-ui/core/Checkbox'
-import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid'
-import ImageIcon from '@material-ui/icons/Image'
 import InventoryFormModal from '../components/Inventory/InventoryFormModal'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 import { MeasurementUnits } from '../constants/units'
 import moment from 'moment'
@@ -17,7 +12,6 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableContainer from '@material-ui/core/TableContainer'
 import TableRow from '@material-ui/core/TableRow'
-import { Avatar, ListItemAvatar, ListItemIcon } from '@material-ui/core'
 import { EnhancedTableHead, EnhancedTableToolbar, getComparator, stableSort } from '../components/Table'
 import React, { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -38,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const normalizeInventory = (inventory) => inventory.map(inv => ({
   ...inv,
   unitOfMeasurement: MeasurementUnits[inv.unitOfMeasurement].name,
-  bestBeforeDate: moment(inv.bestBeforeDate).format('MM/DD/YYYY')
+  bestBeforeDate: moment(inv.bestBeforeDate, 'YYYY-MM-DD').format('MM/DD/YYYY')
 }))
 
 const headCells = [
@@ -175,30 +169,9 @@ const InventoryLayout = (props) => {
                           {inv.unitOfMeasurement}
                         </TableCell>
                         <TableCell align="right">
-                          {inv.bestBeforeDate}
+                          {inv.neverExpires ? 'Never Expires' : inv.bestBeforeDate}
                         </TableCell>
                       </TableRow>
-                      <List dense disablePadding className={classes.root}>
-                        {inventory.map((value, index) =>
-                          <React.Fragment key={index}>
-                            <Divider />
-                            <ListItem button onClick={handleToggle(value)}>
-                              <ListItemIcon>
-                                <Checkbox
-                                  onChange={handleToggle(value)}
-                                  checked={checked.indexOf(value) !== -1}
-                                />
-                              </ListItemIcon>
-                              <ListItemAvatar>
-                                <Avatar className={classes.medium}>
-                                  <ImageIcon />
-                                </Avatar>
-                              </ListItemAvatar>
-                              <ListItemText primary={value.name} />
-                            </ListItem>
-                          </React.Fragment>
-                        )}
-                      </List>
                     </>
                   )
                 })}
@@ -211,7 +184,16 @@ const InventoryLayout = (props) => {
           isDialogOpen={isCreateOpen}
           handleDialog={toggleModals}
           handleInventory={saveInventory}
-          initialValues={{}}
+          initialValues={{
+            name: '',
+            productType: '',
+            description: '',
+            averagePrice: 0,
+            amount: 0,
+            unitOfMeasurement: '',
+            bestBeforeDate: moment().format('YYYY-MM-DD'),
+            neverExpires: false,
+          }}
           products={products}/>
       </Grid>
     </Grid>
