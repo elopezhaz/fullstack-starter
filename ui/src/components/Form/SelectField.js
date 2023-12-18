@@ -1,8 +1,11 @@
 import { getIn } from 'formik'
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import { MenuItem } from '@material-ui/core'
 >>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
+=======
+>>>>>>> c2c363d (Create form working)
 import MuiSelectField from '@material-ui/core/Select'
 import React from 'react'
 
