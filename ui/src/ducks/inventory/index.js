@@ -42,6 +42,20 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
     })
 )
 
+export const removeInventory = createAction(actions.INVENTORY_DELETE, (ids) =>
+  (dispatch, getState, config) => axios
+    .delete(`${config.restAPIUrl}/inventory/${ids}`)
+    .then((suc) => {
+      const invs = []
+      getState().inventory.all.forEach(inv => {
+        if (!ids.includes(inv.id)) {
+          invs.push(inv)
+        }
+      })
+      dispatch(refreshInventory(invs))
+    })
+)
+
 export const refreshInventory = createAction(actions.INVENTORY_REFRESH, (payload) =>
   (dispatcher, getState, config) =>
     payload.sort((inventoryA, inventoryB) =>

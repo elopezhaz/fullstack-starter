@@ -2,6 +2,7 @@ import * as inventoryDuck from '../ducks/inventory'
 import * as productDuck from '../ducks/products'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
+import InventoryDeleteModal from '../components/Inventory/InventoryDeleteModal'
 import InventoryFormModal from '../components/Inventory/InventoryFormModal'
 import { makeStyles } from '@material-ui/core/styles'
 import { MeasurementUnits } from '../constants/units'
@@ -50,6 +51,7 @@ const InventoryLayout = (props) => {
   const products = useSelector(state => state.products.all)
   const inventory = useSelector(state => state.inventory.all)
   const isFetched = useSelector(state => state.inventory.fetched && state.products.fetched)
+  const removeInventory = useCallback(ids => { dispatch(inventoryDuck.removeInventory(ids)) }, [dispatch])
   const saveInventory = useCallback(inventory => { dispatch(inventoryDuck.saveInventory(inventory)) }, [dispatch])
 
   useEffect(() => {
@@ -65,28 +67,19 @@ const InventoryLayout = (props) => {
   const [selected, setSelected] = React.useState([])
 
   const [isCreateOpen, setCreateOpen] = React.useState(false)
+  const [isDeleteOpen, setDeleteOpen] = React.useState(false)
   const toggleCreate = () => {
     setCreateOpen(true)
   }
-
-  const toggleModals = (resetChecked) => {
-    setCreateOpen(false)
-    if (resetChecked) {
-      setChecked([])
-    }
+  const toggleDelete = () => {
+    setDeleteOpen(true)
   }
-
-  const [checked, setChecked] = React.useState([])
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value)
-    const newChecked = [...checked]
-
-    if (currentIndex === -1) {
-      newChecked.push(value)
-    } else {
-      newChecked.splice(currentIndex, 1)
+  const toggleModals = (resetSelected) => {
+    setCreateOpen(false)
+    setDeleteOpen(false)
+    if (resetSelected) {
+      setSelected([])
     }
-    setChecked(newChecked)
   }
 
   const handleRequestSort = (event, property) => {
@@ -130,6 +123,7 @@ const InventoryLayout = (props) => {
         <EnhancedTableToolbar numSelected={selected.length}
           title='Inventory'
           toggleCreate={toggleCreate}
+          toggleDelete={toggleDelete}
         />
         <TableContainer component={Paper}>
           <Table size='small' stickyHeader>
@@ -151,7 +145,7 @@ const InventoryLayout = (props) => {
                     <>
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, inv.id)}
+                        onChange={(event) => handleClick(event, inv.id)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -159,7 +153,9 @@ const InventoryLayout = (props) => {
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
-                          <Checkbox checked={isItemSelected} />
+                          <Checkbox
+                            checked={isItemSelected}
+                          />
                         </TableCell>
                         <TableCell padding="none">{inv.name}</TableCell>
                         <TableCell align="right">{inv.productType}</TableCell>
@@ -195,6 +191,12 @@ const InventoryLayout = (props) => {
             neverExpires: false,
           }}
           products={products}/>
+        <InventoryDeleteModal
+          isDialogOpen={isDeleteOpen}
+          handleDelete={removeInventory}
+          handleDialog={toggleModals}
+          initialValues={selected}
+        />
       </Grid>
     </Grid>
   )
