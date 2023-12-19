@@ -22,7 +22,6 @@ export const findInventory = createAction(
       .get(`${config.restAPIUrl}/inventory`)
       .then((suc) => {
         dispatch(refreshInventory(suc.data))
-        alerts.openSuccess()
       })
 )
 
@@ -38,22 +37,24 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
       })
       invs.push(suc.data)
       dispatch(refreshInventory(invs))
-      alerts.openSuccess()
     })
 )
 
 export const removeInventory = createAction(actions.INVENTORY_DELETE, (ids) =>
-  (dispatch, getState, config) => axios
-    .delete(`${config.restAPIUrl}/inventory/${ids}`)
-    .then((suc) => {
-      const invs = []
-      getState().inventory.all.forEach(inv => {
-        if (!ids.includes(inv.id)) {
-          invs.push(inv)
+  (dispatch, getState, config) =>
+    ids.forEach((id) =>
+      axios
+        .delete(`${config.restAPIUrl}/inventory/${id}`)
+        .then((suc) => {
+          const invs = []
+          getState().inventory.all.forEach(inv => {
+            if (!ids.includes(inv.id)) {
+              invs.push(inv)
+            }
+          })
+          dispatch(refreshInventory(invs))
         }
-      })
-      dispatch(refreshInventory(invs))
-    })
+        ))
 )
 
 export const refreshInventory = createAction(actions.INVENTORY_REFRESH, (payload) =>
