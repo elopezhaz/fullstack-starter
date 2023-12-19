@@ -66,16 +66,21 @@ const InventoryLayout = (props) => {
   const [orderBy, setOrderBy] = React.useState('calories')
   const [selected, setSelected] = React.useState([])
 
+  const [isEditOpen, setEditOpen] = React.useState(false)
   const [isCreateOpen, setCreateOpen] = React.useState(false)
   const [isDeleteOpen, setDeleteOpen] = React.useState(false)
   const toggleCreate = () => {
     setCreateOpen(true)
+  }
+  const toggleEdit = () => {
+    setEditOpen(true)
   }
   const toggleDelete = () => {
     setDeleteOpen(true)
   }
   const toggleModals = (resetSelected) => {
     setCreateOpen(false)
+    setEditOpen(false)
     setDeleteOpen(false)
     if (resetSelected) {
       setSelected([])
@@ -124,6 +129,7 @@ const InventoryLayout = (props) => {
           title='Inventory'
           toggleCreate={toggleCreate}
           toggleDelete={toggleDelete}
+          toggleEdit={toggleEdit}
         />
         <TableContainer component={Paper}>
           <Table size='small' stickyHeader>
@@ -190,6 +196,14 @@ const InventoryLayout = (props) => {
             bestBeforeDate: moment().format('YYYY-MM-DD'),
             neverExpires: false,
           }}
+          products={products}/>
+        <InventoryFormModal
+          title='Edit'
+          formName='inventoryEdit'
+          isDialogOpen={isEditOpen}
+          handleDialog={toggleModals}
+          handleInventory={saveInventory}
+          initialValues={selected[0]}
           products={products}/>
         <InventoryDeleteModal
           isDialogOpen={isDeleteOpen}
