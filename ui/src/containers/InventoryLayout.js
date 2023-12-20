@@ -87,6 +87,18 @@ const InventoryLayout = (props) => {
     }
   }
 
+  const formatInvProps = (inv) => {
+    if (inv) {
+      if (inv.neverExpires) {
+        inv.bestBeforeDate = moment().format('YYYY-MM-DD')
+      }
+      else {
+        inv.bestBeforeDate = moment(inv.bestBeforeDate).format('YYYY-MM-DD')
+      }
+      return inv
+    }
+  }
+
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -203,7 +215,7 @@ const InventoryLayout = (props) => {
           isDialogOpen={isEditOpen}
           handleDialog={toggleModals}
           handleInventory={saveInventory}
-          initialValues={selected[0]}
+          initialValues={formatInvProps(inventory.filter(inv => inv.id === selected[0])[0])}
           products={products}/>
         <InventoryDeleteModal
           isDialogOpen={isDeleteOpen}
