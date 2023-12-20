@@ -82,8 +82,7 @@ public class InventoryDAO {
    * @return Updated Inventory.
    */
   public Optional<Inventory> update(String id, Inventory inventory) {
-    // TODO
-    return Optional.empty();
+    return Optional.ofNullable(this.mongoTemplate.findAndReplace(getQuery(id), inventory));
   }
 
   /**
