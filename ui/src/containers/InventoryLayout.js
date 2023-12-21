@@ -2,10 +2,7 @@ import * as inventoryDuck from '../ducks/inventory'
 import * as productDuck from '../ducks/products'
 import Checkbox from '@material-ui/core/Checkbox'
 import Grid from '@material-ui/core/Grid'
-<<<<<<< HEAD
 import InventoryDeleteModal from '../components/Inventory/InventoryDeleteModal'
-=======
->>>>>>> c2c363d (Create form working)
 import InventoryFormModal from '../components/Inventory/InventoryFormModal'
 import { makeStyles } from '@material-ui/core/styles'
 import { MeasurementUnits } from '../constants/units'
