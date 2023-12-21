@@ -75,12 +75,13 @@ public class InventoryDAOTest {
 
   @Test
   public void update() {
-    Inventory inv = this.inventoryDAO.create(inventory);
+    this.inventoryDAO.create(inventory);
     Inventory toUpdate = new Inventory();
-    toUpdate.setId("654321");
+    toUpdate.setId(inventory.getId());
     toUpdate.setName("New Name");
-    toUpdate.setProductType("New Product Type");
-    this.inventoryDAO.update(inv.getId(), toUpdate);
-    Assert.assertEquals(toUpdate, inv);
+    toUpdate.setDescription("Description");
+    this.inventoryDAO.update(inventory.getId(), toUpdate);
+    Inventory updated = this.inventoryDAO.retrieve(inventory.getId()).get();
+    Assert.assertEquals(updated, toUpdate);
   }
 }

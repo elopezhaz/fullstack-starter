@@ -53,6 +53,7 @@ const InventoryLayout = (props) => {
   const isFetched = useSelector(state => state.inventory.fetched && state.products.fetched)
   const removeInventory = useCallback(ids => { dispatch(inventoryDuck.removeInventory(ids)) }, [dispatch])
   const saveInventory = useCallback(inventory => { dispatch(inventoryDuck.saveInventory(inventory)) }, [dispatch])
+  const updateInventory = useCallback((id, inventory) => { dispatch(inventoryDuck.updateInventory(id, inventory)) }, [dispatch])
 
   useEffect(() => {
     if (!isFetched) {
@@ -214,7 +215,7 @@ const InventoryLayout = (props) => {
           formName='inventoryEdit'
           isDialogOpen={isEditOpen}
           handleDialog={toggleModals}
-          handleInventory={saveInventory}
+          handleInventory={updateInventory}
           initialValues={formatInvProps(inventory.filter(inv => inv.id === selected[0])[0])}
           products={products}/>
         <InventoryDeleteModal

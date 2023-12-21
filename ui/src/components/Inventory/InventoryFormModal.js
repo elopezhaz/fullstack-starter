@@ -44,7 +44,7 @@ class InventoryFormModal extends React.Component {
           validationSchema={formSchema}
           onSubmit={(values) => {
             values.bestBeforeDate = new Date(values.bestBeforeDate).toJSON()
-            handleInventory(values)
+            {title === 'Edit' ? handleInventory(values.id, values) : handleInventory(values)}
             handleDialog(true)
           }}
         >

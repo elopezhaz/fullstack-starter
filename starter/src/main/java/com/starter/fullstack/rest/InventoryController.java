@@ -37,6 +37,11 @@ public class InventoryController {
   public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
   }
+  @RequestMapping(value = "{id}", method = {RequestMethod.PUT})
+  public @ResponseBody Optional<Inventory> updateInventory(@PathVariable("id") String id, @RequestBody Inventory inventory) {
+    Optional<Inventory> updated = this.inventoryDAO.update(id, inventory);
+    return updated;
+  }
   @RequestMapping(value = "{id}", method = {RequestMethod.DELETE})
   public Optional<Inventory> deleteInventory(@PathVariable("id") String id) {
     return this.inventoryDAO.delete(id);

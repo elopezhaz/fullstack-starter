@@ -89,4 +89,23 @@ public class InventoryControllerTest {
 
     Assert.assertEquals(0, this.mongoTemplate.findAll(Inventory.class).size());
   }
+
+  /**
+   * Test update endpoint.
+   * @throws Throwable see MockMvc
+   */
+  @Test
+  public void update() throws Throwable {
+    Inventory toUpdate = new Inventory();
+    toUpdate.setId(this.inventory.getId());
+    toUpdate.setName("NEW TEST");
+    toUpdate.setDescription("DESCRIPTION");
+    toUpdate.setVersion(2);
+    this.mockMvc.perform(put("/inventory/" + this.inventory.getId())
+          .content(this.objectMapper.writeValueAsString(toUpdate))
+          .contentType(MediaType.APPLICATION_JSON)
+          .accept(MediaType.APPLICATION_JSON))
+      .andExpect(status().isOk())
+      .andExpect(content().json(this.objectMapper.writeValueAsString(toUpdate)));
+  }
 }
