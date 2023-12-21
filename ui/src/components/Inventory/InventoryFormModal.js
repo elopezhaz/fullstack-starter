@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import * as Yup from 'yup'
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-import * as Yup from 'yup'
->>>>>>> c2c363d (Create form working)
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -17,17 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
 import { MeasurementUnits } from '../../constants/units'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import moment from 'moment'
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-import moment from 'moment'
->>>>>>> c2c363d (Create form working)
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
 import React from 'react'
 import SelectField from '../Form/SelectField'
 import TextField from '../Form/TextField'
@@ -38,11 +18,6 @@ class InventoryFormModal extends React.Component {
   render() {
     const { formName, handleDialog, handleInventory, title, initialValues, products } =
       this.props
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c2c363d (Create form working)
 
     const formSchema = Yup.object({
       name: Yup.string().required(),
@@ -55,28 +30,10 @@ class InventoryFormModal extends React.Component {
       neverExpires: Yup.boolean().notRequired(),
     })
 
-<<<<<<< HEAD
     return (
       <Dialog
         open={this.props.isDialogOpen}
         maxWidth='sm'
-=======
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-    return (
-      <Dialog
-        open={this.props.isDialogOpen}
-        maxWidth="sm"
-<<<<<<< HEAD
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-    return (
-      <Dialog
-        open={this.props.isDialogOpen}
-        maxWidth='sm'
->>>>>>> c2c363d (Create form working)
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
         fullWidth={true}
         onClose={() => {
           handleDialog(false)
@@ -84,23 +41,9 @@ class InventoryFormModal extends React.Component {
       >
         <Formik
           initialValues={initialValues}
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
           validationSchema={formSchema}
           onSubmit={(values) => {
             values.bestBeforeDate = new Date(values.bestBeforeDate).toJSON()
-=======
-          onSubmit={(values) => {
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-          validationSchema={formSchema}
-          onSubmit={(values) => {
-            values.bestBeforeDate = new Date(values.bestBeforeDate).toJSON()
->>>>>>> c2c363d (Create form working)
-=======
-          onSubmit={(values) => {
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
             handleInventory(values)
             handleDialog(true)
           }}
@@ -125,19 +68,7 @@ class InventoryFormModal extends React.Component {
                     <FormControl fullWidth variant = 'outlined' required>
                       <InputLabel id = 'productTypeId'>Product Type</InputLabel>
                       <Field
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         custom = {{ fullWidth: true }}
-=======
-                        custom = {{ fullWidth: true, defaultValue: '' }}
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-                        custom = {{ fullWidth: true }}
->>>>>>> c2c363d (Create form working)
-=======
-                        custom = {{ fullWidth: true, defaultValue: '' }}
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
                         id = 'productTypeId'
                         name = 'productType'
                         label = 'Product Type'
@@ -165,17 +96,7 @@ class InventoryFormModal extends React.Component {
                       custom={{ variant: 'outlined', fullWidth: true }}
                       name = 'averagePrice'
                       label = 'Average Price'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                       type = 'number'
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-                      type = 'number'
->>>>>>> c2c363d (Create form working)
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
                       component = {TextField}
                     />
                   </Grid>
@@ -184,17 +105,7 @@ class InventoryFormModal extends React.Component {
                       custom={{ variant: 'outlined', fullWidth: true }}
                       name = 'amount'
                       label = 'Amount'
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                       type = 'number'
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-                      type = 'number'
->>>>>>> c2c363d (Create form working)
-=======
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
                       component = {TextField}
                     />
                   </Grid>
@@ -202,19 +113,7 @@ class InventoryFormModal extends React.Component {
                     <FormControl fullWidth variant = 'outlined' required>
                       <InputLabel id = 'unitId'>Unit of Measurement</InputLabel>
                       <Field
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                         custom = {{ fullWidth: true }}
-=======
-                        custom = {{ fullWidth: true, defaultValue: '' }}
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-                        custom = {{ fullWidth: true }}
->>>>>>> c2c363d (Create form working)
-=======
-                        custom = {{ fullWidth: true, defaultValue: '' }}
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
                         id = 'unitId'
                         name = 'unitOfMeasurement'
                         label = 'Unit of Measurement'
@@ -231,9 +130,6 @@ class InventoryFormModal extends React.Component {
                   </Grid>
                   <Grid item xs={6} sm ={6}>
                     <Field
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
                       custom = {{ variant: 'outlined' }}
                       name = 'bestBeforeDate'
                       component = {TextField}
@@ -248,39 +144,6 @@ class InventoryFormModal extends React.Component {
                       as = {FormControlLabel}
                       control = {<Checkbox />}
                     />
-=======
-                      custom={{ variant: 'outlined', fullWidth: true }}
-=======
-                      custom = {{ variant: 'outlined' }}
->>>>>>> c2c363d (Create form working)
-                      name = 'bestBeforeDate'
-                      component = {TextField}
-                      type = 'date'
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm ={6}>
-<<<<<<< HEAD
-                    <FormControlLabel control = {<Checkbox />} label = 'Never Expires' />
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
-=======
-                    <Field
-                      type = 'checkbox'
-                      name = 'neverExpires'
-                      label = 'Never Expires'
-                      as = {FormControlLabel}
-                      control = {<Checkbox />}
-                    />
->>>>>>> c2c363d (Create form working)
-=======
-                      custom={{ variant: 'outlined', fullWidth: true }}
-                      name = 'bestBeforeDate'
-                      label = 'Best Before Date'
-                      component = {TextField}
-                    />
-                  </Grid>
-                  <Grid item xs={6} sm ={6}>
-                    <FormControlLabel control = {<Checkbox />} label = 'Never Expires' />
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
                   </Grid>
                 </Grid>
               </DialogContent>
