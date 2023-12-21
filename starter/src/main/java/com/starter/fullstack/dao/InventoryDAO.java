@@ -15,6 +15,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.util.Assert;
 
+import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
+
 /**
  * Inventory DAO
  */
@@ -30,6 +32,18 @@ public class InventoryDAO {
    */
   private Query getQuery(String id) {
     return new Query(Criteria.where("id").is(id));
+  }
+
+  private Update getUpdateQuery(Inventory inv) {
+    return new Update()
+      .set("name", inv.getName())
+      .set("productType", inv.getProductType())
+      .set("description", inv.getDescription())
+      .set("averagePrice", inv.getAveragePrice())
+      .set("amount", inv.getAmount())
+      .set("unitOfMeasurement", inv.getUnitOfMeasurement())
+      .set("bestBeforeDate", inv.getBestBeforeDate())
+      .set("neverExpires", inv.getNeverExpires());
   }
 
   /**
@@ -85,7 +99,8 @@ public class InventoryDAO {
    * @return Updated Inventory.
    */
   public Optional<Inventory> update(String id, Inventory inventory) {
-    return Optional.of(this.mongoTemplate.save(inventory), flush: true);
+    return Optional.ofNullable(this.mongoTemplate.findAndModify(getQuery(id), getUpdateQuery(inventory),
+      options().returnNew(true).upsert(true), Inventory.class));
   }
 
   /**
