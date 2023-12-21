@@ -37,7 +37,6 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
       })
       invs.push(suc.data)
       dispatch(refreshInventory(invs))
-      alerts.openSuccess()
     })
 )
 
