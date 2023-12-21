@@ -82,6 +82,7 @@ public class InventoryDAOTest {
     toUpdate.setDescription("Description");
     this.inventoryDAO.update(inventory.getId(), toUpdate);
     Inventory updated = this.inventoryDAO.retrieve(inventory.getId()).get();
+    toUpdate.setVersion(2);
     Assert.assertEquals(updated, toUpdate);
   }
 }
