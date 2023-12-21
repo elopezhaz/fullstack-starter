@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import * as alerts from '../alerts'
+=======
+>>>>>>> 17997df (Inventory duck (not tested))
 import axios from 'axios'
 import { createAction, handleActions } from 'redux-actions'
 
@@ -7,7 +10,11 @@ const actions = {
   INVENTORY_GET_ALL_PENDING: 'inventory/get_all_PENDING',
   INVENTORY_SAVE: 'inventory/save',
   INVENTORY_DELETE: 'inventory/delete',
+<<<<<<< HEAD
   INVENTORY_REFRESH: 'inventory/refresh',
+=======
+  INVENTORY_REFRESH: 'inventory/refresh'
+>>>>>>> 17997df (Inventory duck (not tested))
 }
 
 export let defaultState = {
@@ -23,11 +30,14 @@ export const findInventory = createAction(
       .then((suc) => {
         dispatch(refreshInventory(suc.data))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         alerts.openSuccess()
 >>>>>>> 22b40e0 (inventory duck style changes)
+=======
+>>>>>>> 0bcadd5 (Inventory duck (not tested))
       })
-)
+)      
 
 export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
   (dispatch, getState, config) => axios
@@ -41,7 +51,6 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
       })
       invs.push(suc.data)
       dispatch(refreshInventory(invs))
-      alerts.openSuccess()
     })
 )
 
