@@ -85,9 +85,7 @@ public class InventoryDAO {
    * @return Updated Inventory.
    */
   public Optional<Inventory> update(String id, Inventory inventory) {
-    long newVersion = inventory.getVersion() + 1;
-    inventory.setVersion(newVersion);
-    return Optional.of(this.mongoTemplate.save(inventory));
+    return Optional.of(this.mongoTemplate.save(inventory), flush: true);
   }
 
   /**
