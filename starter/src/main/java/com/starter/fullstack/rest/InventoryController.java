@@ -3,10 +3,7 @@ package com.starter.fullstack.rest;
 import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Optional;
->>>>>>> 53c5aa3 (style for backend. form modal partially working. required fields not working yet and table doesn't look right)
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,10 +37,9 @@ public class InventoryController {
   public Inventory createInventory(@RequestBody Inventory inventory) {
     return this.inventoryDAO.create(inventory);
   }
-  
+
   @RequestMapping(value = "{id}", method = {RequestMethod.DELETE})
   public Optional<Inventory> deleteInventory(@PathVariable("id") String id) {
     return this.inventoryDAO.delete(id);
   }
 }
-
