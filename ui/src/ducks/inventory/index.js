@@ -1,4 +1,3 @@
-import * as alerts from '../alerts'
 import axios from 'axios'
 import { createAction, handleActions } from 'redux-actions'
 
@@ -7,7 +6,7 @@ const actions = {
   INVENTORY_GET_ALL_PENDING: 'inventory/get_all_PENDING',
   INVENTORY_SAVE: 'inventory/save',
   INVENTORY_DELETE: 'inventory/delete',
-  INVENTORY_REFRESH: 'inventory/refresh',
+  INVENTORY_REFRESH: 'inventory/refresh'
 }
 
 export let defaultState = {
@@ -38,6 +37,23 @@ export const saveInventory = createAction(actions.INVENTORY_SAVE, (inventory) =>
       invs.push(suc.data)
       dispatch(refreshInventory(invs))
     })
+)
+
+export const removeInventory = createAction(actions.INVENTORY_DELETE, (ids) =>
+  (dispatch, getState, config) =>
+    ids.forEach((id) =>
+      axios
+        .delete(`${config.restAPIUrl}/inventory/${id}`)
+        .then((suc) => {
+          const invs = []
+          getState().inventory.all.forEach(inv => {
+            if (!ids.includes(inv.id)) {
+              invs.push(inv)
+            }
+          })
+          dispatch(refreshInventory(invs))
+        }
+        ))
 )
 
 export const refreshInventory = createAction(actions.INVENTORY_REFRESH, (payload) =>
