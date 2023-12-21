@@ -22,7 +22,6 @@ export const findInventory = createAction(
       .get(`${config.restAPIUrl}/inventory`)
       .then((suc) => {
         dispatch(refreshInventory(suc.data))
-        alerts.openSuccess()
       })
 )
 
