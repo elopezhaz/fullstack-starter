@@ -4,6 +4,8 @@ import com.starter.fullstack.api.Inventory;
 import com.starter.fullstack.dao.InventoryDAO;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,8 +44,8 @@ public class InventoryController {
     Optional<Inventory> updated = this.inventoryDAO.update(id, inventory);
     return updated;
   }
-  @RequestMapping(value = "{id}", method = {RequestMethod.DELETE})
-  public Optional<Inventory> deleteInventory(@PathVariable("id") String id) {
-    return this.inventoryDAO.delete(id);
+  @DeleteMapping
+  public Optional<List<Inventory>> deleteInventory(@RequestBody String[] ids) {
+    return this.inventoryDAO.delete(ids);
   }
 }

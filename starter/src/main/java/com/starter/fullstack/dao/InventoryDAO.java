@@ -1,6 +1,9 @@
 package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
@@ -32,6 +35,10 @@ public class InventoryDAO {
    */
   private Query getQuery(String id) {
     return new Query(Criteria.where("id").is(id));
+  }
+
+  private Query getBatchQuery(List<String> ids) {
+    return new Query(Criteria.where("id").in(ids));
   }
 
   private Update getUpdateQuery(Inventory inv) {
@@ -105,10 +112,12 @@ public class InventoryDAO {
 
   /**
    * Delete Inventory By Id.
-   * @param id Id of Inventory.
+   * @param ids List of ids of Inventories to delete.
    * @return Deleted Inventory.
    */
-  public Optional<Inventory> delete(String id) {
-    return Optional.ofNullable(this.mongoTemplate.findAndRemove(getQuery(id), Inventory.class));
+//  public Optional<List<Inventory>> delete(String[] ids) {
+  public Optional<List<Inventory>> delete(String[] ids) {
+    List<String> listIds = new ArrayList<>(Arrays.asList(ids));
+    return Optional.of(this.mongoTemplate.findAllAndRemove(getBatchQuery(listIds), Inventory.class));
   }
 }

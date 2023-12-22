@@ -13,6 +13,12 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -83,7 +89,14 @@ public class InventoryControllerTest {
    */
   @Test
   public void remove() throws Throwable {
-    this.mockMvc.perform(delete("/inventory/" + this.inventory.getId())
+    Inventory inventory2 = new Inventory();
+    inventory2.setId("OTHER ID");
+    inventory2.setName("ALSO TEST");
+    inventory2 = this.mongoTemplate.save(inventory2);
+    String[] ids = new String[] {this.inventory.getId(), inventory2.getId()};
+    this.mockMvc.perform(delete("/inventory/")
+        .content(this.objectMapper.writeValueAsString(ids))
+        .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
           .andExpect(status().isOk());
 

@@ -1,6 +1,9 @@
 package com.starter.fullstack.dao;
 
 import com.starter.fullstack.api.Inventory;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Resource;
@@ -68,8 +71,14 @@ public class InventoryDAOTest {
   @Test
   public void delete() {
     Inventory createdInv = this.inventoryDAO.create(inventory);
-    this.inventoryDAO.delete(createdInv.getId());
+    Inventory createdInv2 = new Inventory();
+    createdInv2.setName("Name");
+    createdInv2.setId("4321");
+    createdInv2 = this.inventoryDAO.create(createdInv2);
+    String[] ids = new String[] {createdInv.getId(), createdInv2.getId()};
+    this.inventoryDAO.delete(ids);
     Assert.assertEquals(Optional.empty(), this.inventoryDAO.retrieve(createdInv.getId()));
+    Assert.assertEquals(Optional.empty(), this.inventoryDAO.retrieve(createdInv2.getId()));
     Assert.assertFalse(this.inventoryDAO.findAll().contains(inventory));
   }
 
